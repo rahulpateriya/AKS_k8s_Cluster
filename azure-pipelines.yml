@@ -92,5 +92,4 @@ stages:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: '$(workingDirectory)'
-              commandOptions: 'tfplan'
               environmentServiceNameAzureRM: 'rahul_svc'
