@@ -23,7 +23,7 @@ aks_clusters = {
     dns_prefix         = "aksdev"
     node_pool_name     = "default"
     node_count         = 1
-    vm_size            = "Standard_DS2_v3"
+    vm_size            = "Standard_D2s_v3"
     tags               = { environment = "dev" }
   }
 }
