@@ -1,6 +1,6 @@
 resource_groups = {
   rg1 = {
-    name     = "rg-terraform-dev"
+    name     = "rg-terraform-dev1"
     location = "japaneast"
     tags     = { environment = "dev" }
   }
