@@ -4,14 +4,14 @@ trigger:
 pool:
   name: Default
 
-variables:
-  # Update these with your actual Azure Service Connection and Backend details
-  azureServiceConnection: 'your-service-connection-name'
-  resourceGroupName: 'your-backend-rg'
-  storageAccountName: 'your-backend-storage-account'
-  containerName: 'tfstate'
-  tfstateKey: 'dev.terraform.tfstate'
-  workingDirectory: '$(System.DefaultWorkingDirectory)/environments/dev'
+# variables:
+#   # Update these with your actual Azure Service Connection and Backend details
+#   azureServiceConnection: 'your-service-connection-name'
+#   resourceGroupName: 'your-backend-rg'
+#   storageAccountName: 'your-backend-storage-account'
+#   containerName: 'tfstate'
+#   tfstateKey: 'dev.terraform.tfstate'
+#   workingDirectory: '$(System.DefaultWorkingDirectory)/environments/dev'
 
 stages:
 - stage: Lint
@@ -42,24 +42,24 @@ stages:
       inputs:
         terraformVersion: 'latest'
     - task: TerraformTaskV4@4
-      displayName: 'Terraform Init'
       inputs:
         provider: 'azurerm'
         command: 'init'
         workingDirectory: '$(workingDirectory)'
-        backendServiceArm: '$(azureServiceConnection)'
-        backendAzureRmResourceGroupName: '$(resourceGroupName)'
-        backendAzureRmStorageAccountName: '$(storageAccountName)'
-        backendAzureRmContainerName: '$(containerName)'
-        backendAzureRmKey: '$(tfstateKey)'
+        backendServiceArm: 'rahul_svc'
+        backendAzureRmResourceGroupName: 'rg-terraform-state'
+        backendAzureRmStorageAccountName: 'sttfstatedev08'
+        backendAzureRmContainerName: 'tfstate'
+        backendAzureRmKey: 'rahulp'
+
     - task: TerraformTaskV4@4
       displayName: 'Terraform Plan'
       inputs:
         provider: 'azurerm'
         command: 'plan'
         workingDirectory: '$(workingDirectory)'
-        environmentServiceNameAzureRM: '$(azureServiceConnection)'
         commandOptions: '-out=tfplan'
+        environmentServiceNameAzureRM: 'rahul_svc'
 
 - stage: Apply
   displayName: 'Terraform Apply Stage'
@@ -78,21 +78,20 @@ stages:
             inputs:
               terraformVersion: 'latest'
           - task: TerraformTaskV4@4
-            displayName: 'Terraform Init'
             inputs:
               provider: 'azurerm'
               command: 'init'
               workingDirectory: '$(workingDirectory)'
-              backendServiceArm: '$(azureServiceConnection)'
-              backendAzureRmResourceGroupName: '$(resourceGroupName)'
-              backendAzureRmStorageAccountName: '$(storageAccountName)'
-              backendAzureRmContainerName: '$(containerName)'
-              backendAzureRmKey: '$(tfstateKey)'
+              backendServiceArm: 'rahul_svc'
+              backendAzureRmResourceGroupName: 'rg-terraform-state'
+              backendAzureRmStorageAccountName: 'sttfstatedev08'
+              backendAzureRmContainerName: 'tfstate'
+              backendAzureRmKey: 'rahulp'
           - task: TerraformTaskV4@4
             displayName: 'Terraform Apply'
             inputs:
               provider: 'azurerm'
               command: 'apply'
               workingDirectory: '$(workingDirectory)'
-              environmentServiceNameAzureRM: '$(azureServiceConnection)'
               commandOptions: 'tfplan'
+              environmentServiceNameAzureRM: 'rahul_svc'
