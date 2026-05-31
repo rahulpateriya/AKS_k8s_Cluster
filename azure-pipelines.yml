@@ -50,7 +50,7 @@ stages:
         backendAzureRmResourceGroupName: 'rg-terraform-state'
         backendAzureRmStorageAccountName: 'sttfstatedev08'
         backendAzureRmContainerName: 'tfstate'
-        backendAzureRmKey: 'rahulp'
+        backendAzureRmKey: 'rahulkey'
 
     - task: TerraformTaskV4@4
       displayName: 'Terraform Plan'
