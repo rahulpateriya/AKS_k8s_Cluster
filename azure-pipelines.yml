@@ -4,14 +4,14 @@ trigger:
 pool:
   name: Default
 
-# variables:
+variables:
 #   # Update these with your actual Azure Service Connection and Backend details
 #   azureServiceConnection: 'your-service-connection-name'
 #   resourceGroupName: 'your-backend-rg'
 #   storageAccountName: 'your-backend-storage-account'
 #   containerName: 'tfstate'
 #   tfstateKey: 'dev.terraform.tfstate'
-#   workingDirectory: '$(System.DefaultWorkingDirectory)/environments/dev'
+  workingDirectory: '$(System.DefaultWorkingDirectory)/environments/dev'
 
 stages:
 - stage: Lint
